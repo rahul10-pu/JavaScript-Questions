@@ -1,0 +1,251 @@
+var a=10;
+function outer(){
+    var b=20
+    var inner=function(){
+        console.log(a)
+        console.log(b)
+    };
+     inner()
+}
+outer();
+--------------------------------------
+//outside the context of func
+var a=10;
+function outer(){
+    var b=20
+    console.log("outer start")
+    var inner=function(){
+        console.log("inner func")
+        console.log(a)
+        console.log(b)
+    };
+    console.log("outer Ends")
+    return inner
+}
+var innerFn=outer();
+innerFn();
+--------------------------------------
+
+
+
+var a=10;
+function outer(){
+    var b=20
+    a++
+    b++
+    var inner=function(){
+        console.log(a)
+        console.log(b)
+    };
+    return inner
+}
+var innerFn=outer();
+innerFn();
+
+var innerFn2=outer();
+innerFn2()
+--------------------------------------
+
+a=10;
+//wait for 1 sec
+var fn=function(){
+    console.log(a);
+}
+setTimeout(fn,1000)
+console.log("Done")
+//console.log(a)
+
+function createPerson(){
+    var person={
+    "FirstName":"Rahul",
+    "lastName":"Kumar",
+    "getFirstName":function(){
+        return this.FirstName;
+    },
+    "getLastName":function(){
+        return this.lastName;
+    }
+};
+return person;
+}
+
+var person = createPerson();
+console.log(person.getFirstName())
+--------------------------------------
+
+
+
+var person={
+    "firstNmae":"Rahul",
+    "lastName":"Kumar",
+    "getFirstName":function(){
+        return this.FirstName;
+    },
+    "getLastName":function(){
+        return this.lastName;
+    }
+};
+var person=creaatePerson()
+--------------------------------------
+function createPerson(){
+    var firstNmae="Rahul";
+    var lastName="Kumar";
+    var object={
+        "getFirstName":function(){
+            return firstNmae;
+        },
+        "getLastName":function(){
+            return lastname;
+        },
+        "setFirstName":function(name){
+            firstNmae=name;
+        },
+        "setLastName":function(name){
+            lastname=name;
+        }
+    };
+    return object;
+}
+var person=createPerson();
+console.log(person.getFirstName());
+person.setFirstName("Rohit");
+console.log(person.getFirstName());
+--------------------------------------
+
+
+
+var i;
+var print=function(){
+    console.log(i)
+};
+for(i=0;i<10;i++){
+    setTimeout(print,1000)
+}
+--------------------------------------
+
+
+var i;
+
+for(i=0;i<10;i++){
+    (function(){
+        setTimeout(
+           function(){
+            console.log(i);
+           },1000 );
+    })();
+   
+}
+--------------------------------------
+
+
+var i;
+for(i=0;i<10;i++){
+    (function(){
+        var crrI=i;
+        setTimeout(function(){
+               console.log(crrI)
+           },1000 );
+    })();
+   
+}
+--------------------------------------
+
+var i;
+for(i=0;i<10;i++){
+    (function(currI){
+        setTimeout(
+           function(){
+               console.log(currI)
+           },1000 );
+    })(i);
+   
+}
+var addSix = createBase(6);
+addSix(10); 
+addSix(21);
+--------------------------------------
+
+
+
+
+
+
+
+
+function createBase(baseNumber) {
+    return function(N) {
+      return baseNumber + N;
+    }
+  }
+  
+  var addSix = createBase(6);
+  addSix(10);
+  addSix(21);
+
+  function counter() {
+    var counter = 0;
+    return {
+      add: function(increment) { counter += increment; },
+      retrieve: function() { return 'The counter is currently at: ' + counter; }
+    }
+  }
+  var c = counter();
+  c.add(5); 
+  c.add(9); 
+  console.log(c.retrieve());
+  --------------------------------------
+
+  var a = 1
+function foo() {
+  var a = 2;
+
+  function bar() {
+    console.log( a );
+  }
+
+  return bar;
+}
+
+var baz = foo();
+
+baz();
+--------------------------------------
+
+Is closure observed when the code below is executed:
+function wait(message) {
+
+  setTimeout( function timer(){
+    console.log( message );
+  }, 1000 );
+
+}
+wait( "Hello!" );
+--------------------------------------
+for (var i=1; i<=5; i++) {
+    setTimeout( function timer(){
+      console.log( i );
+    }, i*1000 );
+  }
+
+6 is printed 5 times at one second intervals
+
+1, 2, 3, 4, 5 are printed each at one second intervals
+
+1, 2, 3, 4, 5 are printed all at 6 seconds
+
+6 is printed 5 times all at 6 seconds
+--------------------------------------
+
+
+What is closure?
+
+
+a.When a function returns another function, it is said to have a closure over the second function
+
+b.The ability of a function to access its lexical scope when that function is executing outside its lexical scope.
+
+c.When a function is nested within another function
+
+d.When a function is used as a callback
+
+e.functions always have access to their lexical scope, no matter how or when they are called.
